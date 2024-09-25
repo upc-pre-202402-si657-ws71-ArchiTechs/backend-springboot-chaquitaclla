@@ -1,10 +1,5 @@
 package open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.interfaces.rest;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.domain.model.commands.DeleteCountryCommand;
-import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.domain.model.queries.GetAllCountrysQuery;
-import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.domain.model.queries.GetCountryByIdQuery;
-import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.domain.services.CountryCommandService;
-import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.domain.services.CountryQueryService;
 import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.interfaces.rest.resources.CountryResource;
 import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.interfaces.rest.resources.CreateCountryResource;
 import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.interfaces.rest.resources.UpdateCountryResource;

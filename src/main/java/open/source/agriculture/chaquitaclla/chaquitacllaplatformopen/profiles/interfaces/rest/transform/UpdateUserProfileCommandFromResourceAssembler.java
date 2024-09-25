@@ -1,6 +1,5 @@
 package open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.interfaces.rest.transform;
 
-import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.domain.model.commands.UpdateUserProfileCommand;
 import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.interfaces.rest.resources.UpdateUserProfileResource;
 
 public class UpdateUserProfileCommandFromResourceAssembler {

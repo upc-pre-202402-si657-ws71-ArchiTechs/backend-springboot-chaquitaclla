@@ -1,10 +1,6 @@
 package open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.interfaces.acl;
 
-import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.domain.model.commands.CreateUserProfileCommand;
-import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.domain.model.queries.GetUserProfileByEmailQuery;
 import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.domain.model.valueobjects.EmailUser;
-import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.domain.services.UserProfileCommandService;
-import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.domain.services.UserProfileQueryService;
 import org.springframework.stereotype.Service;
 
 @Service
