@@ -1,5 +1,7 @@
 package open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.interfaces.acl;
 
+import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.domain.model.queries.GetProfileByUsernameQuery;
+import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.domain.model.valueobjects.Username;
 import org.springframework.stereotype.Service;
 import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.domain.model.commands.CreateProfileCommand;
 import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.domain.model.queries.GetProfileByEmailQuery;
@@ -40,10 +42,10 @@ public class ProfilesContextFacade {
    * @param zipCode the zip code
    * @return the profile id
    */
-  public Long createProfile(String firstName, String lastName, String email, String street,
+  public Long createProfile(String firstName, String lastName, String username,String email, String street,
       String number, String city, String state, String zipCode) {
 
-    var createProfileCommand = new CreateProfileCommand(firstName, lastName, email, street,
+    var createProfileCommand = new CreateProfileCommand(firstName, lastName, username,email, street,
         number, city, state, zipCode);
     var profile = profileCommandService.handle(createProfileCommand);
     if (profile.isEmpty())
@@ -60,6 +62,20 @@ public class ProfilesContextFacade {
   public Long fetchProfileIdByEmail(String email) {
     var getProfileByEmailQuery = new GetProfileByEmailQuery(new EmailAddress(email));
     var profile = profileQueryService.handle(getProfileByEmailQuery);
+    if (profile.isEmpty())
+      return 0L;
+    return profile.get().getId();
+  }
+
+  /**
+   * Fetches the profile id by username
+   *
+   * @param username the username
+   * @return the profile id
+   */
+  public Long fetchProfileIdByUsername(String username) {
+    var getProfileByUsernameQuery = new GetProfileByUsernameQuery(new Username(username));
+    var profile = profileQueryService.handle(getProfileByUsernameQuery);
     if (profile.isEmpty())
       return 0L;
     return profile.get().getId();
