@@ -5,7 +5,7 @@ import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.in
 
 public class CreateProfileCommandFromResourceAssembler {
   public static CreateProfileCommand toCommandFromResource(CreateProfileResource resource) {
-    return new CreateProfileCommand(resource.firstName(), resource.lastName(),
+    return new CreateProfileCommand(resource.firstName(), resource.lastName(), resource.username(),
         resource.email(), resource.street(), resource.number(), resource.city(),
         resource.postalCode(), resource.country());
   }

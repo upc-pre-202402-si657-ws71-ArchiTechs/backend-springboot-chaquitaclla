@@ -1,5 +1,6 @@
 package open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.application.internal.queryservices;
 
+import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.domain.model.queries.GetProfileByUsernameQuery;
 import org.springframework.stereotype.Service;
 import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.domain.model.queries.GetAllProfilesQuery;
 import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.domain.model.aggregates.Profile;
@@ -27,6 +28,11 @@ public class ProfileQueryServiceImpl implements ProfileQueryService {
   @Override
   public Optional<Profile> handle(GetProfileByIdQuery query) {
     return profileRepository.findById(query.profileId());
+  }
+
+  @Override
+  public Optional<Profile> handle(GetProfileByUsernameQuery query) {
+    return profileRepository.findByUsername(query.username());
   }
 
   @Override

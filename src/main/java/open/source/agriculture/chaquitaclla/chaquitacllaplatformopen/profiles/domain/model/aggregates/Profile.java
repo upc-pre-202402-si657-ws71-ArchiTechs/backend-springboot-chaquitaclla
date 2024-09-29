@@ -5,6 +5,7 @@ import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.do
 import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.domain.model.valueobjects.EmailAddress;
 import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.domain.model.valueobjects.PersonName;
 import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.domain.model.valueobjects.StreetAddress;
+import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.profiles.domain.model.valueobjects.Username;
 import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 
 @Entity
@@ -20,6 +21,11 @@ public class Profile extends AuditableAbstractAggregateRoot<Profile> {
 
   @Embedded
   @AttributeOverrides({
+          @AttributeOverride(name = "username", column = @Column(name = "username"))})
+  Username username;
+
+  @Embedded
+  @AttributeOverrides({
           @AttributeOverride(name = "street", column = @Column(name = "address_street")),
           @AttributeOverride(name = "number", column = @Column(name = "address_number")),
           @AttributeOverride(name = "city", column = @Column(name = "address_city")),
@@ -27,14 +33,16 @@ public class Profile extends AuditableAbstractAggregateRoot<Profile> {
           @AttributeOverride(name = "country", column = @Column(name = "address_country"))})
   private StreetAddress address;
 
-  public Profile(String firstName, String lastName, String email, String street, String number, String city, String postalCode, String country) {
+  public Profile(String firstName, String lastName, String username, String email, String street, String number, String city, String postalCode, String country) {
     this.name = new PersonName(firstName, lastName);
+    this.username = new Username(username);
     this.email = new EmailAddress(email);
     this.address = new StreetAddress(street, number, city, postalCode, country);
   }
 
   public Profile(CreateProfileCommand command) {
     this.name = new PersonName(command.firstName(), command.lastName());
+    this.username = new Username(command.username());
     this.email = new EmailAddress(command.email());
     this.address = new StreetAddress(command.street(), command.number(), command.city(), command.postalCode(), command.country());
   }

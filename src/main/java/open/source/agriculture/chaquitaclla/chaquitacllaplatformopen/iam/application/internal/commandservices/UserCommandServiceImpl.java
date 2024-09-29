@@ -1,6 +1,8 @@
 package open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.iam.application.internal.commandservices;
 
+import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.iam.application.internal.outboundservices.outboundservices.acl.ExternalProfileService;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.iam.application.internal.outboundservices.hashing.HashingService;
 import open.source.agriculture.chaquitaclla.chaquitacllaplatformopen.iam.application.internal.outboundservices.tokens.TokenService;
@@ -29,13 +31,16 @@ public class UserCommandServiceImpl implements UserCommandService {
 
   private final RoleRepository roleRepository;
 
+  private final ExternalProfileService externalProfileService;
+
   public UserCommandServiceImpl(UserRepository userRepository, HashingService hashingService,
-      TokenService tokenService, RoleRepository roleRepository) {
+      TokenService tokenService, RoleRepository roleRepository, @Lazy ExternalProfileService externalProfileService) {
 
     this.userRepository = userRepository;
     this.hashingService = hashingService;
     this.tokenService = tokenService;
     this.roleRepository = roleRepository;
+    this.externalProfileService = externalProfileService;
   }
 
   /**
@@ -71,6 +76,10 @@ public class UserCommandServiceImpl implements UserCommandService {
   public Optional<User> handle(SignUpCommand command) {
     if (userRepository.existsByUsername(command.username()))
       throw new RuntimeException("Username already exists");
+    Long profileId = externalProfileService.fetchProfileIdByUsername(command.username());
+    if (profileId != null && profileId > 0) {
+      throw new RuntimeException("Profile already exists for this username");
+    }
     var roles = command.roles().stream()
         .map(role ->
             roleRepository.findByName(role.getName())
