@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/api/v1/diseases")
+@RequestMapping(value = "/api/v1/crops/diseases")
 @Tag(name = "Diseases", description = "Diseases Management Endpoints")
 public class DiseaseController {
 

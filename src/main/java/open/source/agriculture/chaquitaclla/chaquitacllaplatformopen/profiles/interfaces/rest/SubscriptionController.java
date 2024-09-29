@@ -21,7 +21,7 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping(value = "api/v1/subscription",produces = APPLICATION_JSON_VALUE)
+@RequestMapping(value = "api/v1/users/subscription",produces = APPLICATION_JSON_VALUE)
 @Tag(name="Subscription", description = "Subscription Management Endpoints")
 public class SubscriptionController {
     private final SubscriptionCommandService subscriptionCommandService;
